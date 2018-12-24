@@ -87,7 +87,7 @@ def index():
         'channel_3': channel_3,
         'channel_4': channel_4
     }
-    return render_template('index.html', **templateData)
+    return render_template('home.html', **templateData)
 
 
 @socketio.on('connect', namespace='/test')

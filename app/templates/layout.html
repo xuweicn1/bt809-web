@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主机1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/socket.io.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/echarts.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/raphael-2.1.4.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/justgage.js')}}"></script>
+
+    {% block scrip%}{% endblock%}
+</head>
+
+<body>
+    {% include 'includes/_navbar.html'%}
+    {% include 'includes/_messages.html'%}
+    {% block body%}{% endblock%}
+    {% include 'includes/_footer.html' %}
+</body>
+
+</html>
