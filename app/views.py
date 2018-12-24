@@ -23,8 +23,8 @@ cur = con.cursor()
 
 def getBT809data(x):
     """从809取数 """
-    # with serial.Serial('/dev/ttyUSB0',4800,timeout=1) as ser:
-    with serial.Serial('com3', 4800, timeout=0.5) as ser:
+    with serial.Serial('/dev/ttyUSB0',4800,timeout=1) as ser:
+    # with serial.Serial('com3', 4800, timeout=0.5) as ser:
         ser.write(bytes.fromhex(x))
         fd = ser.readline()
         if len(fd) == 8:
