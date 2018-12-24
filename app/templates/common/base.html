@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    {% block title %}
+      <title>康湃蓝电子温控系统</title>
+    {% endblock %}
+
+    {% block metas %}
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="yes">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% endblock %}
+
+    {% block styles %}
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    {% endblock %}
+
+    {% block scripts %}
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/socket.io.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/echarts.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/raphael-2.1.4.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/justgage.js')}}"></script>
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block navbar %}
+      <nav class="navbar navbar-default navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">
+                   欢迎进入康湃蓝BT809温度监控系统
+                </a>
+            </div>
+        </div>
+      </nav>
+    {% endblock %}
+
+    {% block subnavbar %}
+    <div class="subnavbar" style="height:100px;">
+    </div>
+    {% endblock %}
+
+
+    {% block content %}
+    {% endblock %}
+    {% include "common/footer.html" %}
+  </body>
+</html>
