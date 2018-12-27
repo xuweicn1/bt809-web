@@ -120,7 +120,7 @@ def table():
       data = cur.fetchall ()
    return render_template("table.html",data=data)
 
-@app.route("/vents.html")
+@app.route("/vents")
 def vents():
    '''读引脚状态发送到前端'''
    for pin in pins:
@@ -135,9 +135,9 @@ def vent(changePin, action):
     '''执行前端发来请求'''
     if action == "on":
         '''通电'''
-        GPIO.output(changePin, GPIO.HIGH) 
+        GPIO.output(changePin, GPIO.HIGH)
 
-    if action == "off": 
+    if action == "off":
         '''断电'''
         GPIO.output(changePin, GPIO.LOW)
 
