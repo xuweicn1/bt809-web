@@ -1,0 +1,27 @@
+{% extends 'layout.html'%}
+
+{%block body%}
+
+<h1>进风口状态</h1>
+   <hr>
+   <table class="table table-striped">
+    <tr>
+      <th>信道</th>
+      <th>状态</th>
+      <th>控制</th>
+    </tr>
+    {% for pin in pins %}
+      <tr>
+        <td>{{ pins[pin].name }}</td>
+        {% if pins[pin].state == true %}
+            <td>开启</td>
+            <td><a href="/{{pin}}/off" class="btn btn-danger" role="button">关闭</a></td>
+        {% else %}
+            <td>关闭</td>
+            <td><a href="/{{pin}}/on" class="btn btn-success" role="button">开启</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

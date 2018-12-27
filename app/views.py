@@ -8,6 +8,7 @@ from threading import Lock
 from flask import Flask, render_template, session, request
 from flask_socketio import SocketIO, emit
 from app import app
+import RPi.GPIO as GPIO
 
 
 async_mode = None
@@ -20,6 +21,18 @@ dbname = 'BT809Data.db'
 con = lite.connect(dbname, check_same_thread=False)
 cur = con.cursor()
 
+GPIO.setmode(GPIO.BCM)
+
+pins = {
+   18 : {'name' : '信道1', 'state' : GPIO.LOW},
+   23 : {'name' : '信道2', 'state' : GPIO.LOW},
+   24 : {'name' : '信道3', 'state' : GPIO.LOW}
+   }
+
+for pin in pins:
+    '''设置每个引脚为输出,置低电平'''
+    GPIO.setup(pin, GPIO.OUT)
+    GPIO.output(pin, GPIO.LOW)
 
 def getBT809data(x):
     """从809取数 """
@@ -106,6 +119,39 @@ def table():
       cur.execute('''select * from temp''')
       data = cur.fetchall ()
    return render_template("table.html",data=data)
+
+@app.route("/vents.html")
+def vents():
+   '''读引脚状态发送到前端'''
+   for pin in pins:
+      pins[pin]['state'] = GPIO.input(pin)
+   templateData = {
+      'pins' : pins
+      }
+   return render_template('vents.html', **templateData)
+
+@app.route("/<int:changePin>/<action>", methods=['GET', 'POST'])
+def vent(changePin, action):
+    '''执行前端发来请求'''
+    if action == "on":
+        '''通电'''
+        GPIO.output(changePin, GPIO.HIGH) 
+
+    if action == "off": 
+        '''断电'''
+        GPIO.output(changePin, GPIO.LOW)
+
+    for pin in pins:
+        '''读引脚状态发送到网页'''
+        pins[pin]['state'] = GPIO.input(pin)
+
+    templateData = {
+    'pins' : pins
+    }
+
+    return render_template('vents.html', **templateData)
+
+
 
 
 if __name__ == '__main__':
