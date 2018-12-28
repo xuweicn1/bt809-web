@@ -24,9 +24,10 @@ cur = con.cursor()
 GPIO.setmode(GPIO.BCM)
 
 pins = {
-   18 : {'name' : '信道1', 'state' : GPIO.LOW},
-   23 : {'name' : '信道2', 'state' : GPIO.LOW},
-   24 : {'name' : '信道3', 'state' : GPIO.LOW}
+   24 : {'name' : '信道1', 'state' : GPIO.LOW},
+   25 : {'name' : '信道2', 'state' : GPIO.LOW},
+   18 : {'name' : '信道3', 'state' : GPIO.LOW},
+   23 : {'name' : '信道4', 'state' : GPIO.LOW}
    }
 
 for pin in pins:
@@ -130,14 +131,15 @@ def vents():
       }
    return render_template('vents.html', **templateData)
 
+
 @app.route("/<int:changePin>/<action>", methods=['GET', 'POST'])
 def vent(changePin, action):
     '''执行前端发来请求'''
     if action == "on":
         '''通电'''
-        GPIO.output(changePin, GPIO.HIGH)
+        GPIO.output(changePin, GPIO.HIGH) 
 
-    if action == "off":
+    if action == "off": 
         '''断电'''
         GPIO.output(changePin, GPIO.LOW)
 
